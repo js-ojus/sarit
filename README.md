@@ -19,7 +19,7 @@ These can be used in process-driven applications, in which logical documents mov
 
 Examples include front-office — back-office document flows, issue ticket kind of flows, and maker — checker flows such as leave approvals, expense approvals or resource requisition approvals.
 
-> ![TIP](https://thenounproject.com/icon/bulb-4827231/) **TIP**
+> ![TIP](icons/doc_bulb.jpg) **TIP**
 >
 > `sarit` is a Sanskrit word meaning 'stream', 'river' - something that _flows_!
 
