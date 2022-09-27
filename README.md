@@ -61,7 +61,7 @@ Each variance between them will be a bug in either or both.
 `sarit` publishes a REST API that is accessible over HTTPS.
 Specify the paths to the certificate file and the key file in the configuration, for use by TLS.
 
-> 💡 **TIP**
+> ![TIP](icons/doc_bulb.jpg) **TIP**
 >
 > Depending on the network configuration and your specific use case, using a self-signed certificate may suffice.
 
@@ -90,7 +90,7 @@ curl -H 'X-Sarit-Client-Id: 4AXHLL4KCQPERDXR' \
      https://172.16.3.150:8080/users
 ```
 
-> ⚠ **WARNING**
+> ![TIP](icons/doc_warning.jpg) **WARNING**
 >
 > `sarit` is intended to be run inside your private network. Do **not** expose it directly to the public Internet.
 
@@ -130,7 +130,7 @@ The user's ULID is generated during registration.
 
 Users cannot be deleted.
 
-> ⚠ **WARNING**
+> ![TIP](icons/doc_warning.jpg) **WARNING**
 >
 > The current user, on whose behalf an action is requested, is assumed by `sarit` to be an active user of the system.
 > Thus, the requesting application **must** ensure that the said user is actually a valid and an active user.
@@ -196,7 +196,7 @@ Namespaces cannot be deleted.
 However, they can be inactivated at any time.
 New workflow instances cannot start in inactivated namespaces.
 
-> **NOTE**
+> ![TIP](icons/doc_note.jpg) **NOTE**
 >
 > `sarit` has a reserved namespace called `sys`, in which system metadata is maintained.
 
@@ -204,7 +204,7 @@ New workflow instances cannot start in inactivated namespaces.
 
 A process flow defines a directed graph of the exhaustive possibilities of flow states and the transitions between them, in a particular business process.
 
-> 💡 **TIP**
+> ![TIP](icons/doc_bulb.jpg) **TIP**
 >
 > We use "process flow" and "workflow" interchangeably.
 
@@ -317,7 +317,7 @@ A user can **reject** a task that is either claimed by them or assigned to them.
 A rejected task goes back to the group Inbox from where it was claimed or assigned.
 If it was directly assigned to the user, then it gets redirected to the Inbox of the user's manager.
 
-> **NOTE**
+> ![TIP](icons/doc_note.jpg) **NOTE**
 >
 > Movement of a task from the group Inbox to a user's Inbox does _not_ alter its priority.
 
@@ -337,7 +337,7 @@ Those tasks that are already in such a group's Inbox at the time of it getting i
 
 ### Privileges
 
-> **NOTE**
+> ![TIP](icons/doc_note.jpg) **NOTE**
 >
 > `sarit` is **not** a general purpose authorization engine.
 > The privileges in `sarit` are used only for workflow management within `sarit`.
