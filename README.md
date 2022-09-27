@@ -19,23 +19,23 @@ These can be used in process-driven applications, in which logical documents mov
 
 Examples include front-office — back-office document flows, issue ticket kind of flows, and maker — checker flows such as leave approvals, expense approvals or resource requisition approvals.
 
-> **TIP**
+> ![TIP](https://thenounproject.com/icon/bulb-4827231/) **TIP**
 >
-> **sarit** is a Sanskrit word meaning 'stream', 'river' - something that _flows_!
+> `sarit` is a Sanskrit word meaning 'stream', 'river' - something that _flows_!
 
 ### Principles
 
 The following are the high-level guiding principles of `sarit`.
 
-* `sarit` should be small and easily manageable.
-* `sarit` should provide a set of primitives that enable a variety of process-driven applications.
+* `sarit` should be small and easily maintainable.
+* `sarit` should have low cognitive load.
+* `sarit` should provide flexible primitives that enable a rich variety of use cases.
 * `sarit` should minimize external dependencies.
 
 The following are the current dependencies.
 
 * [SQLite3](https://sqlite.org) for persistence [^sqliteVer].
 * [mattn's go-sqlite3](https://github.com/mattn/go-sqlite3) as the database driver
-* [jmoiron's sqlx](https://github.com/jmoiron/sqlx) for convenient database interface
 * [julienschmidt's httprouter](https://github.com/julienschmidt/httprouter) for efficient routing
 * [oklog's ulid](https://github.com/oklog/ulid) for easily sortable database IDs
 * [Uber's Zap](https://go.uber.org/zap) for logging
@@ -43,11 +43,12 @@ The following are the current dependencies.
 ### Non-goals
 
 `sarit` is expressly *not* intended to be an enterprise-grade workflow engine.
-The following features are not supported.
+The following features are **not** supported.
 
-* Import from, and export to, workflow modelling formats like BPMN/XPDL.
+* Import from, and export to, workflow modelling formats like BPMN and XPDL.
 * Executable specifications like BPEL and Wf-XML.
 * Hierarchical regimes (only graph-like regimes are supported).
+* Choreography (only orchestration is supported).
 
 ## This Document
 
@@ -60,7 +61,7 @@ Each variance between them will be a bug in either or both.
 `sarit` publishes a REST API that is accessible over HTTPS.
 Specify the paths to the certificate file and the key file in the configuration, for use by TLS.
 
-> **TIP**
+> 💡 **TIP**
 >
 > Depending on the network configuration and your specific use case, using a self-signed certificate may suffice.
 
@@ -89,7 +90,7 @@ curl -H 'X-Sarit-Client-Id: 4AXHLL4KCQPERDXR' \
      https://172.16.3.150:8080/users
 ```
 
-> **WARNING**
+> ⚠ **WARNING**
 >
 > `sarit` is intended to be run inside your private network. Do **not** expose it directly to the public Internet.
 
@@ -129,7 +130,7 @@ The user's ULID is generated during registration.
 
 Users cannot be deleted.
 
-> **WARNING**
+> ⚠ **WARNING**
 >
 > The current user, on whose behalf an action is requested, is assumed by `sarit` to be an active user of the system.
 > Thus, the requesting application **must** ensure that the said user is actually a valid and an active user.
@@ -203,7 +204,7 @@ New workflow instances cannot start in inactivated namespaces.
 
 A process flow defines a directed graph of the exhaustive possibilities of flow states and the transitions between them, in a particular business process.
 
-> **TIP**
+> 💡 **TIP**
 >
 > We use "process flow" and "workflow" interchangeably.
 
@@ -404,5 +405,7 @@ TASKS
 * Special handling for recursive groups.
 * Lazy validation of access and availability to a user.
 
-[^goVer]: Currently tested using Go v1.19.x.
-[^sqliteVer]: It requires SQLite version ≥ 3.37.0, since we use `STRICT` tables.
+[^goVer]: Requires >= v1.19.
+
+[^sqliteVer]: Requires >= v3.37.
+
