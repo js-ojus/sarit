@@ -3,12 +3,12 @@ Original author: Srinivas JONNALAGADDA &lt;js@ojuslabs.com&gt;
 
 ## Status
 
-`sarit` is in early development currently, and does *not* yet have usable releases.
+`sarit` is in early development currently, and does **not** yet have usable releases.
 
 ## Introduction
 
 `sarit` (_IPA_: sʌrɪt) is a tiny state machine + workflow engine.
-It is developed using the [Go](https://go.dev) programming language[^goVer].
+It is developed using the [Go](https://go.dev) programming language.[^goVer]
 
 `sarit` provides primitives that can be used to define and manage:
 
@@ -25,11 +25,10 @@ Examples include front-office — back-office document flows, issue ticket kind 
 
 ### Principles
 
-The following are the guiding principles of `sarit`.
+The following are the high-level guiding principles of `sarit`.
 
-* `sarit` is intended for small-to-medium size applications.
 * `sarit` should be small and easily manageable.
-* `sarit` should provide a set of features that enable a reasonably broad spectrum of process-driven applications.
+* `sarit` should provide a set of primitives that enable a variety of process-driven applications.
 * `sarit` should minimize external dependencies.
 
 The following are the current dependencies.
