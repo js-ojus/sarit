@@ -284,7 +284,7 @@ A flow object (instance) that is in a given state, upon receiving an applicable 
 Such sub-flows, when defined as above, run in parallel.
 It is _not_ necessary for a unique downstream rendezvous point to merge all such sub-flows.
 
-> **State Transitions vs. Connections**
+> ![TIP](icons/doc_explanation.jpg) **State Transitions vs. Connections**
 >
 > The topology of the state transitions graph is orthogonal to that of workflow connections.
 > Thus, each process flow has two conceptual graphs that together fully define its functionality.
@@ -323,7 +323,7 @@ If it was directly assigned to the user, then it gets redirected to the Inbox of
 
 Once a user performs an action on a task, should the action result in a state transition of that object, it moves to the user's Outbox.
 
-> **Task Exclusivity**
+> ![TIP](icons/doc_explanation.jpg) **Task Exclusivity**
 >
 > An object can never simultaneously be in a given user's Inbox and Outbox.
 > As a corollary, should a user's action on a task result in a transition of that object into a state that assigns the object as the next task to the same user, it returns to the Inbox of that user.
