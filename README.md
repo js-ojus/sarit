@@ -8,7 +8,7 @@ Original author: Srinivas JONNALAGADDA &lt;js@ojuslabs.com&gt;
 ## Introduction
 
 `sarit` (_IPA_: sʌrɪt) is a tiny state machine + workflow engine.
-It is developed using the [Go](https://go.dev) programming language.[^goVer]
+It is developed using the [Go](https://go.dev) programming language [^goVer].
 
 `sarit` provides primitives that can be used to define and manage:
 
@@ -33,7 +33,7 @@ The following are the high-level guiding principles of `sarit`.
 
 The following are the current dependencies.
 
-* [SQLite3](https://sqlite.org) for persistence[^sqliteVer].
+* [SQLite3](https://sqlite.org) for persistence [^sqliteVer].
 * [mattn's go-sqlite3](https://github.com/mattn/go-sqlite3) as the database driver
 * [jmoiron's sqlx](https://github.com/jmoiron/sqlx) for convenient database interface
 * [julienschmidt's httprouter](https://github.com/julienschmidt/httprouter) for efficient routing
@@ -403,8 +403,6 @@ TASKS
 * Difference between assignment to a user's Inbox and a group's.
 * Special handling for recursive groups.
 * Lazy validation of access and availability to a user.
-
-____
 
 [^goVer]: Currently tested using Go v1.19.x.
 [^sqliteVer]: It requires SQLite version ≥ 3.37.0, since we use `STRICT` tables.
