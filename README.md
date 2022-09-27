@@ -91,7 +91,7 @@ curl -H 'X-Sarit-Client-Id: 4AXHLL4KCQPERDXR' \
 ```
 
 > **WARNING**
-> 
+>
 > `sarit` is intended to be run inside your private network. Do **not** expose it directly to the public Internet.
 
 ## Concepts
@@ -131,7 +131,7 @@ The user's ULID is generated during registration.
 Users cannot be deleted.
 
 > **WARNING**
-> 
+>
 > The current user, on whose behalf an action is requested, is assumed by `sarit` to be an active user of the system.
 > Thus, the requesting application **must** ensure that the said user is actually a valid and an active user.
 
@@ -197,7 +197,7 @@ However, they can be inactivated at any time.
 New workflow instances cannot start in inactivated namespaces.
 
 > **NOTE**
-> 
+>
 > `sarit` has a reserved namespace called `sys`, in which system metadata is maintained.
 
 ### Process Flows
@@ -205,7 +205,7 @@ New workflow instances cannot start in inactivated namespaces.
 A process flow defines a directed graph of the exhaustive possibilities of flow states and the transitions between them, in a particular business process.
 
 > **TIP**
-> 
+>
 > We use "process flow" and "workflow" interchangeably.
 
 Workflow names must be unique within their respective namespaces, and have a size in the closed interval `[2,50]`.
@@ -285,7 +285,7 @@ Such sub-flows, when defined as above, run in parallel.
 It is _not_ necessary for a unique downstream rendezvous point to merge all such sub-flows.
 
 > **State Transitions vs. Connections**
-> 
+>
 > The topology of the state transitions graph is orthogonal to that of workflow connections.
 > Thus, each process flow has two conceptual graphs that together fully define its functionality.
 > Though both are driven by events, the underlying mechanisms of fulfilment are different for each.
@@ -318,13 +318,13 @@ A rejected task goes back to the group Inbox from where it was claimed or assign
 If it was directly assigned to the user, then it gets redirected to the Inbox of the user's manager.
 
 > **NOTE**
-> 
+>
 > Movement of a task from the group Inbox to a user's Inbox does _not_ alter its priority.
 
 Once a user performs an action on a task, should the action result in a state transition of that object, it moves to the user's Outbox.
 
 > **Task Exclusivity**
-> 
+>
 > An object can never simultaneously be in a given user's Inbox and Outbox.
 > As a corollary, should a user's action on a task result in a transition of that object into a state that assigns the object as the next task to the same user, it returns to the Inbox of that user.
 
