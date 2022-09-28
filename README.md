@@ -90,7 +90,7 @@ curl -H 'X-Sarit-Client-Id: 4AXHLL4KCQPERDXR' \
      https://172.16.3.150:8080/users
 ```
 
-> ![WARNING](icons/doc_warning.png) **WARNING**
+> ![DANGER](icons/doc_danger.png) **DANGER**
 >
 > `sarit` is intended to be run inside your private network. Do **not** expose it directly to the public Internet.
 
@@ -420,3 +420,5 @@ ____
 'Flag' by Oksana Latysheva from <a href="https://thenounproject.com/browse/icons/term/flag/" target="_blank" title="Flag Icons">Noun Project</a>
 
 'Bulb' by 1art from <a href="https://thenounproject.com/browse/icons/term/bulb/" target="_blank" title="bulb Icons">Noun Project</a>
+
+'Danger' by ircham from <a href="https://thenounproject.com/browse/icons/term/danger/" target="_blank" title="Danger Icons">Noun Project</a>
