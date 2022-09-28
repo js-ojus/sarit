@@ -419,6 +419,6 @@ ____
 
 'Flag' by Oksana Latysheva from <a href="https://thenounproject.com/browse/icons/term/flag/" target="_blank" title="Flag Icons">Noun Project</a>
 
-'Bulb' by 1art from <a href="https://thenounproject.com/browse/icons/term/bulb/" target="_blank" title="bulb Icons">Noun Project</a>
+'Tips' by Adrien Coquet from <a href="https://thenounproject.com/browse/icons/term/tip/" target="_blank" title="Tip Icons">Noun Project</a>
 
 'Danger' by ircham from <a href="https://thenounproject.com/browse/icons/term/danger/" target="_blank" title="Danger Icons">Noun Project</a>
