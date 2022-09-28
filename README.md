@@ -19,7 +19,7 @@ These can be used in process-driven applications, in which logical documents mov
 
 Examples include front-office — back-office document flows, issue ticket kind of flows, and maker — checker flows such as leave approvals, expense approvals or resource requisition approvals.
 
-> ![TIP](icons/doc_bulb.jpg) **TIP**
+> ![TIP](icons/doc_tip.png) **TIP**
 >
 > `sarit` is a Sanskrit word meaning 'stream', 'river' - something that _flows_!
 
@@ -61,7 +61,7 @@ Each variance between them will be a bug in either or both.
 `sarit` publishes a REST API that is accessible over HTTPS.
 Specify the paths to the certificate file and the key file in the configuration, for use by TLS.
 
-> ![TIP](icons/doc_bulb.jpg) **TIP**
+> ![TIP](icons/doc_tip.png) **TIP**
 >
 > Depending on the network configuration and your specific use case, using a self-signed certificate may suffice.
 
@@ -90,7 +90,7 @@ curl -H 'X-Sarit-Client-Id: 4AXHLL4KCQPERDXR' \
      https://172.16.3.150:8080/users
 ```
 
-> <img src="icons/doc_warning.png" width="50" alt="TIP" /> **WARNING**
+> ![WARNING](icons/doc_warning.png) **WARNING**
 >
 > `sarit` is intended to be run inside your private network. Do **not** expose it directly to the public Internet.
 
@@ -130,7 +130,7 @@ The user's ULID is generated during registration.
 
 Users cannot be deleted.
 
-> <img src="icons/doc_warning.png" width="50" alt="TIP" /> **WARNING**
+> ![WARNING](icons/doc_warning.png) **WARNING**
 >
 > The current user, on whose behalf an action is requested, is assumed by `sarit` to be an active user of the system.
 > Thus, the requesting application **must** ensure that the said user is actually a valid and an active user.
@@ -196,7 +196,7 @@ Namespaces cannot be deleted.
 However, they can be inactivated at any time.
 New workflow instances cannot start in inactivated namespaces.
 
-> ![TIP](icons/doc_note.jpg) **NOTE**
+> ![NOTE](icons/doc_note.jpg) **NOTE**
 >
 > `sarit` has a reserved namespace called `sys`, in which system metadata is maintained.
 
@@ -204,7 +204,7 @@ New workflow instances cannot start in inactivated namespaces.
 
 A process flow defines a directed graph of the exhaustive possibilities of flow states and the transitions between them, in a particular business process.
 
-> ![TIP](icons/doc_bulb.jpg) **TIP**
+> ![TIP](icons/doc_tip.png) **TIP**
 >
 > We use "process flow" and "workflow" interchangeably.
 
@@ -284,7 +284,7 @@ A flow object (instance) that is in a given state, upon receiving an applicable 
 Such sub-flows, when defined as above, run in parallel.
 It is _not_ necessary for a unique downstream rendezvous point to merge all such sub-flows.
 
-> ![TIP](icons/doc_explanation.jpg) **State Transitions vs. Connections**
+> ![EXPLANATION](icons/doc_explanation.png) **State Transitions vs. Connections**
 >
 > The topology of the state transitions graph is orthogonal to that of workflow connections.
 > Thus, each process flow has two conceptual graphs that together fully define its functionality.
@@ -317,13 +317,13 @@ A user can **reject** a task that is either claimed by them or assigned to them.
 A rejected task goes back to the group Inbox from where it was claimed or assigned.
 If it was directly assigned to the user, then it gets redirected to the Inbox of the user's manager.
 
-> ![TIP](icons/doc_note.jpg) **NOTE**
+> ![NOTE](icons/doc_note.jpg) **NOTE**
 >
 > Movement of a task from the group Inbox to a user's Inbox does _not_ alter its priority.
 
 Once a user performs an action on a task, should the action result in a state transition of that object, it moves to the user's Outbox.
 
-> ![TIP](icons/doc_explanation.jpg) **Task Exclusivity**
+> ![EXPLANATION](icons/doc_explanation.png) **Task Exclusivity**
 >
 > An object can never simultaneously be in a given user's Inbox and Outbox.
 > As a corollary, should a user's action on a task result in a transition of that object into a state that assigns the object as the next task to the same user, it returns to the Inbox of that user.
@@ -337,7 +337,7 @@ Those tasks that are already in such a group's Inbox at the time of it getting i
 
 ### Privileges
 
-> ![TIP](icons/doc_note.jpg) **NOTE**
+> ![NOTE](icons/doc_note.jpg) **NOTE**
 >
 > `sarit` is **not** a general purpose authorization engine.
 > The privileges in `sarit` are used only for workflow management within `sarit`.
@@ -414,3 +414,9 @@ ____
 ### Icon credits:
 
 'Warning' by Thengakola from <a href="https://thenounproject.com/browse/icons/term/warning/" target="_blank" title="Warning Icons">Noun Project</a>
+
+'Tips' by Adrien Coquet from <a href="https://thenounproject.com/browse/icons/term/tips/" target="_blank" title="Tips Icons">Noun Project</a>
+
+'Flag' by Oksana Latysheva from <a href="https://thenounproject.com/browse/icons/term/flag/" target="_blank" title="Flag Icons">Noun Project</a>
+
+'Bulb' by 1art from <a href="https://thenounproject.com/browse/icons/term/bulb/" target="_blank" title="bulb Icons">Noun Project</a>
