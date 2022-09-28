@@ -196,7 +196,7 @@ Namespaces cannot be deleted.
 However, they can be inactivated at any time.
 New workflow instances cannot start in inactivated namespaces.
 
-> ![NOTE](icons/doc_note.jpg) **NOTE**
+> ![NOTE](icons/doc_note.png) **NOTE**
 >
 > `sarit` has a reserved namespace called `sys`, in which system metadata is maintained.
 
@@ -317,7 +317,7 @@ A user can **reject** a task that is either claimed by them or assigned to them.
 A rejected task goes back to the group Inbox from where it was claimed or assigned.
 If it was directly assigned to the user, then it gets redirected to the Inbox of the user's manager.
 
-> ![NOTE](icons/doc_note.jpg) **NOTE**
+> ![NOTE](icons/doc_note.png) **NOTE**
 >
 > Movement of a task from the group Inbox to a user's Inbox does _not_ alter its priority.
 
@@ -337,7 +337,7 @@ Those tasks that are already in such a group's Inbox at the time of it getting i
 
 ### Privileges
 
-> ![NOTE](icons/doc_note.jpg) **NOTE**
+> ![NOTE](icons/doc_note.png) **NOTE**
 >
 > `sarit` is **not** a general purpose authorization engine.
 > The privileges in `sarit` are used only for workflow management within `sarit`.
