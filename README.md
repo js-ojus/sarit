@@ -130,7 +130,7 @@ The user's ULID is generated during registration.
 
 Users cannot be deleted.
 
-> ![TIP](icons/doc_warning.svg | width=50) **WARNING**
+> <img src="icons/doc_warning.svg" width="50" alt="TIP" /> **WARNING**
 >
 > The current user, on whose behalf an action is requested, is assumed by `sarit` to be an active user of the system.
 > Thus, the requesting application **must** ensure that the said user is actually a valid and an active user.
