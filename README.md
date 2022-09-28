@@ -130,7 +130,7 @@ The user's ULID is generated during registration.
 
 Users cannot be deleted.
 
-> ![TIP](icons/doc_warning.jpg) **WARNING**
+> ![TIP](icons/doc_warning.svg | width=50) **WARNING**
 >
 > The current user, on whose behalf an action is requested, is assumed by `sarit` to be an active user of the system.
 > Thus, the requesting application **must** ensure that the said user is actually a valid and an active user.
@@ -409,3 +409,8 @@ TASKS
 
 [^sqliteVer]: Requires >= v3.37.
 
+____
+
+### Icon credits:
+
+'Warning' by Thengakola from <a href="https://thenounproject.com/browse/icons/term/warning/" target="_blank" title="Warning Icons">Noun Project</a>
