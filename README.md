@@ -90,7 +90,7 @@ curl -H 'X-Sarit-Client-Id: 4AXHLL4KCQPERDXR' \
      https://172.16.3.150:8080/users
 ```
 
-> ![TIP](icons/doc_warning.jpg) **WARNING**
+> <img src="icons/doc_warning.png" width="50" alt="TIP" /> **WARNING**
 >
 > `sarit` is intended to be run inside your private network. Do **not** expose it directly to the public Internet.
 
@@ -130,7 +130,7 @@ The user's ULID is generated during registration.
 
 Users cannot be deleted.
 
-> <img src="icons/doc_warning.svg" width="50" alt="TIP" /> **WARNING**
+> <img src="icons/doc_warning.png" width="50" alt="TIP" /> **WARNING**
 >
 > The current user, on whose behalf an action is requested, is assumed by `sarit` to be an active user of the system.
 > Thus, the requesting application **must** ensure that the said user is actually a valid and an active user.
