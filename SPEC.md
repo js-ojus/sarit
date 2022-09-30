@@ -1,4 +1,4 @@
-# (Informal) Specification
+## (Informal) Specification
 
 This document is intended to serve as an informal specification of `sarit`.
 The implementation shall follow this informal specification.
@@ -16,7 +16,7 @@ Specify the paths to the certificate file and the key file in the configuration,
 Authentication is through a client ID and a client secret, both of which have to be set in the request's HTTP header.
 The header keys are `X-Sarit-Client-ID` and `X-Sarit-Client-Secret`, respectively.
 An initial client ID and its client secret are generated for *admin* during setup.
-These can be found in the setup log, which is located in `log` directory in the specified database path.
+These can be found in the setup log, which is located in `log` directory in the server's working directory.
 Once `sarit` service is started, this key pair can be used to connect to the service and perform all other desired actions.
 
 An example header is shown below.
@@ -40,13 +40,14 @@ curl -H 'X-Sarit-Client-Id: 4AXHLL4KCQPERDXR' \
 
 > ![DANGER](icons/doc_danger.png) **DANGER**
 >
-> `sarit` is intended to be run inside your private network. Do **not** expose it directly to the public Internet.
+> `sarit` is intended to be run inside your private network.
+> Do **not** expose it directly to the public Internet.
 
 ## Concepts
 
 Let us familiarize ourselves with the important concepts and moving parts of `sarit`.
 
-Even as you read the following, it is highly recommended that you read the database table definitions in `cmd/setup`.
+Even as you read the following, it is highly recommended that you read the database table definitions in `sql/migrations` directory.
 That should help you in forming a mental model of `sarit` faster.
 
 ### Users
@@ -58,23 +59,26 @@ That should help you in forming a mental model of `sarit` faster.
 
 are performed by an appropriate external service.
 
-Users (and other entities) are represented in `sarit` by their globally-unique [ULIDs](https://github.com/ulid/spec).
+Users (and other entities) are represented in `sarit` by their unique [ULIDs](https://github.com/ulid/spec).
 In addition, `sarit` stores an application-defined string ID for each user.
-These string IDs - referred to as *name* - must be unique too.
-This is intended to facilitate cross-linking `sarit` data with the application's user data.
+These string IDs - referred to as _usernames_ - must be unique too.
+These _usernames_ facilitate cross-linking `sarit` data with the application's user data.
 
-Usernames must have a size in the closed interval `[6,128]`. They must satisfy the following regexp.
+Usernames must have a size in the closed interval `[6,128]`.
+They must satisfy the following regexp.
 
-```regex
+```regexp
 [A-Za-z0-9][A-Za-z0-9\-_.@]{4,126}[A-Za-z0-9]
 ```
 
 Email addresses are usually good usernames.
 
-The special user `administrator` is predefined by `sarit`. This user has privileges granted on all legal actions in the system.
+The special user `admin` is predefined by `sarit`.
+This user cannot be deleted.
+This user has privileges granted on all the legal actions in the system.
 
 Each user must be registered with `sarit` before they can participate in process flows.
-The user's ULID is generated during registration.
+The user's unique ULID is generated during registration.
 
 Users cannot be deleted.
 
@@ -88,24 +92,30 @@ Accordingly, privileges given to services follow the same rules and mechanisms a
 
 ### Groups
 
-Groups are collections of users and other groups.
+`sarit` has two kinds of groups.
+
+User Group
+: A group created for a specific user.
+  That user is the sole member of this group.
+Collection Group
+: A group whose members are zero or more other groups.
+
 In general, the relationship between users and groups is **M:N**.
 
-Groups are represented in `sarit` by their globally-unique ULIDs.
+Groups are represented in `sarit` by their unique ULIDs.
 Group names must be unique and have a size in the closed interval `[6,128]`.
 They must satisfy the following regexp.
 
-```regex
+```regexp
 [A-Za-z0-9][A-Za-z0-9\-_:/]{4,126}[A-Za-z0-9]
 ```
 
-The special group `admin` is predefined by `sarit`.
-Members of this group have privileges granted on all legal actions in the system.
-The special user `administrator` is a member of this group.
+Note that `sarit` does not ascribe any meaning to group names.
+To `sarit`, they are opaque strings.
 
-When naming groups, it is common to express hierarchies using a combination of colon and forward slash.
-For instance, `sales:in/south` could represent all sales people of the organization who operate in the southern region of India.
-Similarly, `fin:us/west` could represent all finance personnel operating along the west coast of the USA.
+When naming collection groups, we can express hierarchies using a combination of colon and forward slash.
+For instance, `sales:in/south` could represent all the sales people of the organization who operate in the southern region of India.
+Similarly, `fin:us/west` could represent all the finance personnel operating along the west coast of the USA.
 
 `sarit` provides the following predefined states for groups:
 
@@ -114,9 +124,14 @@ Similarly, `fin:us/west` could represent all finance personnel operating along t
 
 with self-evident meanings.
 
+The special group `admin` is predefined by `sarit`.
+This group cannot be deleted.
+Members of this group have privileges granted on all the legal actions in the system.
+The special user `admin` is a predefined member of this group, and cannot be removed from it.
+
 Groups cannot be deleted.
 However, they can be inactivated at any time.
-New tasks cannot be delivered to an inactive group's **Inbox**.
+New tasks cannot be delivered to an inactive group's [Inbox](#tasks).
 
 ### Namespaces
 
@@ -126,9 +141,12 @@ Each application (or service) that uses `sarit` must define its own distinct nam
 Namespace names must be unique and have a size in the closed interval `[2,50]`.
 They must satisfy the following regexp.
 
-```regex
+```regexp
 [A-Za-z0-9][A-Za-z0-9\-_:/]{0,48}[A-Za-z0-9]
 ```
+
+Note that `sarit` does not ascribe any meaning to namespace names.
+To `sarit`, they are opaque strings.
 
 A process flow created by an application resides in that application's namespace.
 In addition, privileges granted (or revoked) to (or from) users and groups can be scoped by namespaces.
@@ -146,7 +164,7 @@ New workflow instances cannot start in inactivated namespaces.
 
 > ![NOTE](icons/doc_note.png) **NOTE**
 >
-> `sarit` has a reserved namespace called `sys`, in which system metadata is maintained.
+> `sarit` has a reserved namespace called `sys`.
 
 ### Process Flows
 
@@ -159,7 +177,7 @@ A process flow defines a directed graph of the exhaustive possibilities of flow 
 Workflow names must be unique within their respective namespaces, and have a size in the closed interval `[2,50]`.
 They must satisfy the following regexp.
 
-```regex
+```regexp
 [A-Za-z0-9][A-Za-z0-9\-_:/]{0,48}[A-Za-z0-9]
 ```
 
@@ -193,7 +211,7 @@ All defined process flow states must be reachable from the start state.
 State names must be unique within their respective workflows, and have a size in the closed interval `[2,50]`.
 They must satisfy the following regexp.
 
-```regex
+```regexp
 [A-Za-z0-9][A-Za-z0-9\-_]{0,48}[A-Za-z0-9]
 ```
 
@@ -217,12 +235,13 @@ The workflow behaviour of each state is determined by the types of its incoming 
 
 ### Events
 
-Flows undergo state transitions in response to user and system actions. In `sarit`, such actions are represented by *events*.
+Flows undergo state transitions in response to user and system actions.
+In `sarit`, such actions are represented by *events*.
 
 Event names must be unique within their respective workflows, and have a size in the closed interval `[2,50]`.
 They must satisfy the following regexp.
 
-```regex
+```regexp
 [A-Za-z0-9][A-Za-z0-9\-_]{0,48}[A-Za-z0-9]
 ```
 
@@ -238,13 +257,14 @@ It is _not_ necessary for a unique downstream rendezvous point to merge all such
 > Thus, each process flow has two conceptual graphs that together fully define its functionality.
 > Though both are driven by events, the underlying mechanisms of fulfilment are different for each.
 
-### Tasks
+### Tasks {#tasks}
 
 A **task** is a process flow object that is _not_ in an end state.
 
 Each user and group in `sarit` has an **Inbox** of tasks, and an **Outbox** of tasks or flow objects in their end states.
 
-Inbox is a destination for tasks that are assigned to a user or a group. Each task is marked with a priority level.
+Inbox is a destination for tasks that are assigned to a user or a group.
+Each task is marked with a priority level.
 `sarit` provides the following levels of priorities:
 
 - High,
