@@ -94,11 +94,12 @@ Accordingly, privileges given to services follow the same rules and mechanisms a
 
 `sarit` has two kinds of groups.
 
-User Group
-: A group created for a specific user.
-  That user is the sole member of this group.
-Collection Group
-: A group whose members are zero or more other groups.
+<dl>
+  <dt>User Group</dt>
+  <dd>A group created for a specific user. That user is the sole member of this group.</dd>
+  <dt>Collection Group</dt>
+  <dd>A group whose members are zero or more other groups.</dd>
+</dl>
 
 In general, the relationship between users and groups is **M:N**.
 
